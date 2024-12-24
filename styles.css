@@ -1,3 +1,7 @@
+:root {
+  --box-contain-width: 768px;
+}
+
 *, 
 *::before, 
 *::after {
@@ -11,6 +15,7 @@
 body {
   line-height: calc(1em + 0.5rem);
   -webkit-font-smoothing: antialiased;
+
 }
 
 img, picture, video, canvas, svg {
@@ -45,4 +50,23 @@ h1 {
 h2 {
   margin-top: 1em;
   margin-bottom: .5em;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.boxes {
+  display: flex;
+  flex-wrap: wrap;
+  width: var(--box-contain-width);
+  height: var(--box-contain-width);
+  border: 1px solid #ccc;
+}
+
+.box {
+  height: calc(100% / 16);
+  border: 1px solid #ccc;
+  width: calc(100% / 16);
 }
