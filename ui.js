@@ -1,9 +1,9 @@
 
 const container = document.querySelector(".container");
-
 const boxes = document.createElement("div");
 boxes.classList.add("boxes");
 
+// Get window's size width
 getWindowWidth();
 window.addEventListener("resize", getWindowWidth);
 
@@ -25,7 +25,19 @@ for (let i = 0 ; i < 256 ; i++) {
   box.classList.add("box");
   
   boxes.appendChild(box);
-}
+} 
 
 container.appendChild(boxes);
 
+// feat: Hover Effect on Boxes
+// get all boxes
+const allBoxes = document.getElementsByClassName("box");
+
+Array.from(allBoxes).forEach((box) => {
+  box.addEventListener("mouseenter", fillBox);
+  
+  function fillBox(e) {
+    // console.log(e);
+    e.target.style.backgroundColor = "#bbbbbb";
+  }
+})
