@@ -1,7 +1,19 @@
 
-const container = document.querySelector(".container");
-const boxes = document.createElement("div");
-boxes.classList.add("boxes");
+const mainContainer = document.querySelector(".container");
+const boxContainer = document.createElement("div");
+boxContainer.classList.add("boxes");
+
+// Create a 16x16 box set
+for (let i = 0 ; i < 256 ; i++) {
+  const box = document.createElement("div");
+  box.classList.add("box");
+  
+  boxContainer.appendChild(box);
+}
+
+mainContainer.appendChild(boxContainer);
+
+const allBoxes = document.getElementsByClassName("box");
 
 // Get window's size width
 getWindowWidth();
@@ -13,31 +25,68 @@ function getWindowWidth() {
   // Prevents box's height size from being longer than box's width size in smaller screens
   if (width < 769) {
     // Set box container height as same as the viewport's width 
-    boxes.style.height = `${width}px`;
+    boxContainer.style.height = `${width}px`;
   } else {
-    boxes.style.height = "";
+    boxContainer.style.height = "";
   }
-}
-
-// Create a 16x16 box set
-for (let i = 0 ; i < 256 ; i++) {
-  const box = document.createElement("div");
-  box.classList.add("box");
-  
-  boxes.appendChild(box);
 } 
 
-container.appendChild(boxes);
 
 // feat: Hover Effect on Boxes
 // get all boxes
-const allBoxes = document.getElementsByClassName("box");
+boxHoverEffect();
+function boxHoverEffect() {
+  Array.from(allBoxes).forEach((box) => {
+    box.addEventListener("mouseenter", fillBox);
+    
+    function fillBox(e) {
+      // console.log(e);
+      e.target.classList.add("fill");
+    }
+  })
+}
 
-Array.from(allBoxes).forEach((box) => {
-  box.addEventListener("mouseenter", fillBox);
-  
-  function fillBox(e) {
-    // console.log(e);
-    e.target.classList.add("fill");
+// feat: Add button prompt to replace grid with custom number of squares per side
+
+const button = document.createElement("button");
+const buttonText = "Create New Grid";
+button.classList.add("button");
+
+button.appendChild(document.createTextNode(buttonText));
+
+// Insert button before boxes
+mainContainer.insertBefore(button, boxContainer);
+
+button.addEventListener("click", createNewGrid);
+
+function createNewGrid() {
+  let value = prompt("How many squares per side do you want?", 10);
+
+  if (value === null) {
+    return false;
+  } else if (value >= 2 && value <= 100) {
+    // delete all current box divs
+    Array.from(allBoxes).forEach((box) => {
+      box.remove()
+    })
+
+    // Square the value to calculate total boxes needed
+    let boxesToCreate = Math.pow(value, 2);
+
+    // Add new box depending on value submitted
+    for (let i = 0 ; i < boxesToCreate ; i++) {
+      const newBox = document.createElement("div");
+      newBox.classList.add("box");
+      //new box width and height divided by value inputted (to ensure equal box sizes)
+      newBox.style.width = `calc(100% / ${value})`;
+      newBox.style.height = `calc(100% / ${value})`;
+      boxContainer.appendChild(newBox);
+    } 
+  } else {
+    alert("Value must be a number between 2 and 100");
+    createNewGrid();
   }
-})
+  boxHoverEffect();
+}
+
+

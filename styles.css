@@ -55,6 +55,12 @@ h2 {
 .container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+}
+
+.button {
+  margin: 20px;
+  width: 40%;
 }
 
 .boxes {
