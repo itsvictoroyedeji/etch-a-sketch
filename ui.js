@@ -38,16 +38,27 @@ boxHoverEffect();
 function boxHoverEffect() {
   //get all boxes
   Array.from(allBoxes).forEach((box) => {
+
+    let opacity = 0;
     box.addEventListener("mouseenter", fillBox);
     
     function fillBox(e) {
-      // console.log(e);
-      e.target.style.backgroundColor = `rgb(${randomColor(255)}, ${randomColor(255)}, ${randomColor(255)})`;
-    }
 
-    function randomColor(num) {
-      return Math.floor(Math.random() * num + 1);
+      // Fully black box
+      e.target.style.backgroundColor = `rgba(0, 0, 0, ${newOpacity()})`;
+      
+      // // Random color box
+      // e.target.style.backgroundColor = `rgba(${randomColor(255)}, ${randomColor(255)}, ${randomColor(255)}, ${newOpacity()})`;
+
+      // function randomColor(num) {
+      //   return Math.floor(Math.random() * num + 1);
+      // }
+
+      function newOpacity() {
+        return opacity += 0.1;
+      }
     }
+    
   })
 }
 
