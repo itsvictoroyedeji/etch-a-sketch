@@ -33,15 +33,20 @@ function getWindowWidth() {
 
 
 // feat: Hover Effect on Boxes
-// get all boxes
 boxHoverEffect();
+
 function boxHoverEffect() {
+  //get all boxes
   Array.from(allBoxes).forEach((box) => {
     box.addEventListener("mouseenter", fillBox);
     
     function fillBox(e) {
       // console.log(e);
-      e.target.classList.add("fill");
+      e.target.style.backgroundColor = `rgb(${randomColor(255)}, ${randomColor(255)}, ${randomColor(255)})`;
+    }
+
+    function randomColor(num) {
+      return Math.floor(Math.random() * num + 1);
     }
   })
 }
@@ -86,6 +91,8 @@ function createNewGrid() {
     alert("Value must be a number between 2 and 100");
     createNewGrid();
   }
+  
+  // reactivates hover effect after new grid creation
   boxHoverEffect();
 }
 
