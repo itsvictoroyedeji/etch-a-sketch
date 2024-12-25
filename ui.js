@@ -38,6 +38,6 @@ Array.from(allBoxes).forEach((box) => {
   
   function fillBox(e) {
     // console.log(e);
-    e.target.style.backgroundColor = "#bbbbbb";
+    e.target.classList.add("fill");
   }
 })

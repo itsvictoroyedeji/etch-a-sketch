@@ -70,3 +70,7 @@ h2 {
   border: 1px solid #ccc;
   width: calc(100% / 16);
 }
+
+.fill {
+  background-color: #bbb;
+}
