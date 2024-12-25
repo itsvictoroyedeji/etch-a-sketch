@@ -60,7 +60,7 @@ h2 {
 
 .button {
   margin: 20px;
-  width: 40%;
+  width: var(--box-contain-width);
 }
 
 .boxes {
